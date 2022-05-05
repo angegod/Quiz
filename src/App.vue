@@ -31,7 +31,7 @@ const questions=ref([//題庫
     'Quizzes'
   ],selected: null
 },{
-  question:'',
+  question:'Test question',
   answer:1,
   options:[
     'Walking in space ',
@@ -82,8 +82,13 @@ const setUser=()=>{//直接用vmodel綁定不需要透過方法呼叫設置 除�
 
 const enter=()=>{
   console.log(user.value);
-  quizCompleted.value=1;
+  if(user.value!='')
+    quizCompleted.value=1;
+  else
+    alert("The User name Required!!")
 }
+
+
 
 </script>
 
@@ -91,10 +96,11 @@ const enter=()=>{
   <main class="app">
     <h1>The Quiz</h1>
   <section class="user-info" v-if="quizCompleted==0">
-    <input type="text" v-model="user" placeholder="username" class="setUser"/>
+    <input type="text" v-model="user" placeholder="username" class="setUser" v-on:keyup.enter="enter"/>
     <button 
       @click="enter"
       class="setUserbtn"
+      :disabled="!user"
     >Enter</button>
   </section>
 
